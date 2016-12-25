@@ -1,5 +1,6 @@
 var toTree = require('posthtml/lib/parser').toTree;
 var retext = require('retext')();
+var report = require('vfile-reporter');
 
 module.exports = function(plugins) {
 
@@ -12,7 +13,10 @@ module.exports = function(plugins) {
     return function posthtmlRetext(tree) {
         tree.walk(function(node) {
             if(typeof node === 'string' && !/^\n\s*$/.test(node)) {
-                return toTree(retext.process(node))[0];
+              return toTree(retext.process(node, function(err, file) {
+                console.log(String(file));
+                console.error(report(err || file));
+              }))[0];
             }
             return node;
         });

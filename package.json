@@ -4,8 +4,9 @@
   "description": "Retext PostHTML plugin",
   "main": "index.js",
   "dependencies": {
+    "posthtml": "^0.4.1",
     "retext": "^1.0.0",
-    "posthtml": "^0.4.1"
+    "vfile-reporter": "^3.0.0"
   },
   "devDependencies": {
     "chai": "^3.2.0",

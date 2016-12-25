@@ -14,8 +14,7 @@ module.exports = function(plugins) {
         tree.walk(function(node) {
             if(typeof node === 'string' && !/^\n\s*$/.test(node)) {
               return toTree(retext.process(node, function(err, file) {
-                console.log(String(file));
-                console.error(report(err || file));
+                if (err) console.error(report(err));
               }))[0];
             }
             return node;

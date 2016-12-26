@@ -14,10 +14,11 @@ module.exports = function(plugins) {
         tree.walk(function(node) {
             if(typeof node === 'string' && !/^\n\s*$/.test(node)) {
               return toTree(retext.process(node, function(err, file) {
-                console.log('err', err);
-                console.log('file', file);
-                if (err !== 'no issues found') {
-                  console.error(report(err || file));
+                if (err) {
+                  console.error(report(err));
+                }
+                if (file.messages.length) {
+                  console.error(report(file));
                 }
               }))[0];
             }
